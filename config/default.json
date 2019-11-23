@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://Afej:vanillajs@project-one-s03bw.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "secret"
+}
