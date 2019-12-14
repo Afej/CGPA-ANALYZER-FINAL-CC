@@ -1,8 +1,28 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ResultContext from '../../context/result/resultContext';
 
 const CourseForm = () => {
   const resultContext = useContext(ResultContext);
+
+  const {
+    addCourse,
+    current,
+    clearCurrentCourse,
+    updateCourse
+  } = resultContext;
+
+  useEffect(() => {
+    if (current !== null) {
+      setCourse(current);
+    } else {
+      setCourse({
+        courseName: '',
+        unit: '',
+        grade: '',
+        score: ''
+      });
+    }
+  }, [resultContext, current]);
 
   const [course, setCourse] = useState({
     courseName: '',
@@ -21,18 +41,21 @@ const CourseForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    resultContext.addCourse(course);
-    setCourse({
-      courseName: '',
-      unit: '',
-      grade: '',
-      score: ''
-    });
+    if (current === null) {
+      addCourse(course);
+    } else {
+      updateCourse(course);
+    }
+    clearAll();
+  };
+
+  const clearAll = () => {
+    clearCurrentCourse();
   };
 
   return (
     <form onSubmit={onSubmit} className='py-2'>
-      <h2>Add Course</h2>
+      <h2>{current ? 'Edit Course' : 'Add Course'}</h2>
       <div className='grid-2'>
         <input
           type='text'
@@ -70,8 +93,20 @@ const CourseForm = () => {
         />
       </div>
       <div className='text-center'>
-        <input type='submit' value='Add Course' className='btn btn-primary' />
+        <input
+          type='submit'
+          value={current ? 'Update Course' : 'Add Course'}
+          className='btn btn-primary'
+        />
       </div>
+
+      {current && (
+        <div>
+          <button className='btn btn-light btn-block' onClick={clearAll}>
+            Clear
+          </button>
+        </div>
+      )}
     </form>
   );
 };

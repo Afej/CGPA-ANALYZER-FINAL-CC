@@ -4,15 +4,12 @@ import ResultContext from '../../context/result/resultContext';
 const CourseItem = ({ course }) => {
   const resultContext = useContext(ResultContext);
 
-  const { deleteCourse, editCourse } = resultContext;
-  const { id, courseName, grade, unit, score } = course;
+  const { deleteCourse, setCurrentCourse, clearCurrentCourse } = resultContext;
+  const { _id, courseName, grade, unit, score } = course;
 
   const onDelete = () => {
-    deleteCourse(id);
-  };
-
-  const onEdit = () => {
-    editCourse(id);
+    deleteCourse(_id);
+    clearCurrentCourse();
   };
 
   return (
@@ -28,11 +25,14 @@ const CourseItem = ({ course }) => {
         </div>
       </div>
       <p className='text-right'>
-        <button className='btn btn-dark btn-sm' onClick={onEdit}>
-          <i class='fas fa-pen-fancy'></i>
+        <button
+          className='btn btn-dark btn-sm'
+          onClick={() => setCurrentCourse(course)}
+        >
+          <i className='fas fa-pen-fancy'></i>
         </button>
         <button className='btn btn-danger btn-sm' onClick={onDelete}>
-          <i class='fas fa-trash-alt'></i>
+          <i className='fas fa-trash-alt'></i>
         </button>
       </p>
     </div>
