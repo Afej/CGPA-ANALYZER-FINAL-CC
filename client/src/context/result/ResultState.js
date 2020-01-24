@@ -10,14 +10,17 @@ import {
   COURSE_ERROR,
   SET_CURRENT_COURSE,
   CLEAR_CURRENT_COURSE,
-  CLEAR_RESULTS
+  CLEAR_RESULTS,
+  GET_RESULT
 } from '../types';
 
 const ResultState = props => {
   const initialState = {
     courses: null,
     current: null,
-    error: null
+    error: null,
+    semester: null,
+    cgpa: null
   };
 
   const [state, dispatch] = useReducer(resultReducer, initialState);
@@ -105,19 +108,30 @@ const ResultState = props => {
     }
   };
 
+  // calculate result
+  const getCgpa = result => {
+    dispatch({
+      type: GET_RESULT,
+      payload: result
+    });
+  };
+
   return (
     <ResultContext.Provider
       value={{
         courses: state.courses,
         current: state.current,
         error: state.error,
+        cgpa: state.cgpa,
+        semester: state.semester,
         addCourse,
         deleteCourse,
         updateCourse,
         setCurrentCourse,
         clearCurrentCourse,
         getCourses,
-        clearResults
+        clearResults,
+        getCgpa
       }}
     >
       {props.children}

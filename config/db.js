@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const config = require("config");
+const mongoose = require('mongoose');
+const config = require('config');
 
-const db = config.get("mongoURI");
+const db = config.get('mongoURI');
 
 const connectDB = async () => {
   try {
@@ -12,7 +12,7 @@ const connectDB = async () => {
       useUnifiedTopology: true
     });
 
-    console.log("MongoDB connected");
+    console.log('MongoDB connected');
   } catch (err) {
     console.log(err.message);
     process.exit(1);

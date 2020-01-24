@@ -6,11 +6,17 @@ import {
   SET_CURRENT_COURSE,
   CLEAR_CURRENT_COURSE,
   COURSE_ERROR,
-  CLEAR_RESULTS
+  CLEAR_RESULTS,
+  GET_RESULT
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
+    case GET_RESULT:
+      return {
+        ...state,
+        cgpa: action.payload
+      };
     case GET_COURSES:
       return {
         ...state,
@@ -20,7 +26,7 @@ export default (state, action) => {
     case ADD_COURSE:
       return {
         ...state,
-        courses: [...state.courses, action.payload],
+        courses: [action.payload, ...state.courses],
         loading: false
       };
     case DELETE_COURSE:

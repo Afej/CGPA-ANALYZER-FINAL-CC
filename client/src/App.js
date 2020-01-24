@@ -4,6 +4,7 @@ import Navbar from './components/layouts/Navbar';
 import Alerts from './components/layouts/Alerts';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
+import Result from './components/pages/Result';
 
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
@@ -31,7 +32,8 @@ const App = () => {
               <div className='container'>
                 <Alerts />
                 <Switch>
-                  <PrivateRoute exact path='/' component={Home} />
+                  <Route exact path='/' component={Home} />
+                  <PrivateRoute exact path='/results' component={Result} />
                   <Route exact path='/about' component={About} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
