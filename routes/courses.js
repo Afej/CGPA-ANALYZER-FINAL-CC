@@ -6,9 +6,11 @@ const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
 const Result = require('../models/Result');
 const Course = require('../models/Course');
+const Semester = require('../models/Semester');
 
 // @route GET api/courses
-// @desc get resuuuuuuuuuuuuuult of user
+// @route GET api/semester/courses
+// @desc get semester courses of users
 // @access private
 router.get('/', auth, async (req, res) => {
   try {
@@ -20,8 +22,8 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route POST api/courses
-// @desc Add course of user
+// @route POST api/semester/courses
+// @desc Add course of user to a semester
 // @access private
 router.post(
   '/',
@@ -54,15 +56,18 @@ router.post(
     const { courseName, grade, unit, score } = req.body;
 
     try {
-      const newCourse = new Course({
+      const semester = await Semester.findOne({ user: req.user.id });
+
+      const course = new Course({
         courseName,
         grade,
         unit,
         score,
-        user: req.user.id
+        user: req.user.id,
+        semester: semester._id
       });
 
-      const course = await newCourse.save();
+      await course.save();
       res.json(course);
     } catch (err) {
       console.error(err.message);
