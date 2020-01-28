@@ -8,6 +8,10 @@ const Result = require('../models/Result');
 const Course = require('../models/Course');
 const Semester = require('../models/Semester');
 
+// including other resources and re-routing
+const courseRouter = require('./courses');
+router.use('/:semesterID/courses', courseRouter);
+
 // @route GET api/semester
 // @desc get semester courses of users
 // @access private

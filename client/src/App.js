@@ -4,6 +4,7 @@ import Navbar from './components/layouts/Navbar';
 import Alerts from './components/layouts/Alerts';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
+import Semester from './components/pages/Semester';
 import Result from './components/pages/Result';
 
 import Login from './components/auth/Login';
@@ -33,6 +34,7 @@ const App = () => {
                 <Alerts />
                 <Switch>
                   <Route exact path='/' component={Home} />
+                  <PrivateRoute exact path='/semester' component={Semester} />
                   <PrivateRoute exact path='/results' component={Result} />
                   <Route exact path='/about' component={About} />
                   <Route exact path='/register' component={Register} />

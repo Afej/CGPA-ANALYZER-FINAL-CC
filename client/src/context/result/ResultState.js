@@ -8,10 +8,12 @@ import {
   GET_COURSES,
   UPDATE_COURSE,
   COURSE_ERROR,
+  SEMESTER_ERROR,
   SET_CURRENT_COURSE,
   CLEAR_CURRENT_COURSE,
   CLEAR_RESULTS,
-  GET_RESULT
+  GET_RESULT,
+  ADD_SEMESTER
 } from '../types';
 
 const ResultState = props => {
@@ -20,6 +22,7 @@ const ResultState = props => {
     current: null,
     error: null,
     semester: null,
+    totalUnits: null,
     cgpa: null
   };
 
@@ -55,6 +58,26 @@ const ResultState = props => {
       dispatch({
         type: COURSE_ERROR,
         payload: err.response.msg
+      });
+    }
+  };
+
+  // add semestr
+  const addSemester = async () => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await axios.post('/api/semester', config);
+
+      dispatch({ type: ADD_SEMESTER, payload: res.data });
+    } catch (err) {
+      dispatch({
+        type: SEMESTER_ERROR,
+        payload: err.response
       });
     }
   };
@@ -109,10 +132,11 @@ const ResultState = props => {
   };
 
   // calculate result
-  const getCgpa = result => {
+  const setResult = (result, totalUnits) => {
     dispatch({
       type: GET_RESULT,
-      payload: result
+      payload: result,
+      totalUnits
     });
   };
 
@@ -131,7 +155,8 @@ const ResultState = props => {
         clearCurrentCourse,
         getCourses,
         clearResults,
-        getCgpa
+        setResult,
+        addSemester
       }}
     >
       {props.children}

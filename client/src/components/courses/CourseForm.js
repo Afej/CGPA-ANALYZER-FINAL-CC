@@ -45,34 +45,9 @@ const CourseForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    // switch (course.score) {
-    //   case course.score >= '70' && course.score <= '100':
-    //     console.log('grade is a');
-    //     break;
-
-    //   case course.score >= 60 && course.score <= 69:
-    //     console.log('grade is B');
-    //     break;
-
-    //   case course.score >= 50 && course.score <= 59:
-    //     console.log('Grade is c');
-    //     break;
-
-    //   case course.score >= 45 && course.score <= 49:
-    //     console.log('grade is d');
-    //     break;
-
-    //   case course.score <= 44:
-    //     console.log('sorry oh, na F');
-    //     break;
-
-    //   default:
-    //     console.log('Invalid Score');
-    //     break;
-    // }
 
     if (current === null) {
-      console.log(course.score);
+      // console.log(course.score);
       addCourse(course);
     } else {
       updateCourse(course);

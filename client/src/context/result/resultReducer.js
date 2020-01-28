@@ -6,8 +6,10 @@ import {
   SET_CURRENT_COURSE,
   CLEAR_CURRENT_COURSE,
   COURSE_ERROR,
+  SEMESTER_ERROR,
   CLEAR_RESULTS,
-  GET_RESULT
+  GET_RESULT,
+  ADD_SEMESTER
 } from '../types';
 
 export default (state, action) => {
@@ -15,7 +17,8 @@ export default (state, action) => {
     case GET_RESULT:
       return {
         ...state,
-        cgpa: action.payload
+        cgpa: action.payload.result,
+        totalUnits: action.payload.totalUnits
       };
     case GET_COURSES:
       return {
@@ -27,6 +30,12 @@ export default (state, action) => {
       return {
         ...state,
         courses: [action.payload, ...state.courses],
+        loading: false
+      };
+    case ADD_SEMESTER:
+      return {
+        ...state,
+        semester: [action.payload._id],
         loading: false
       };
     case DELETE_COURSE:
@@ -61,6 +70,7 @@ export default (state, action) => {
         current: null
       };
     case COURSE_ERROR:
+    case SEMESTER_ERROR:
       return {
         ...state,
         error: action.payload

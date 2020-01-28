@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator');
 
@@ -22,7 +22,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route POST api/semester/courses
+// @route POST api/courses
 // @desc Add course of user to a semester
 // @access private
 router.post(

@@ -6,7 +6,7 @@ import Spinner from '../layouts/Spinner';
 const Courses = () => {
   const resultContext = useContext(ResultContext);
 
-  const { courses, getCourses, loading, getCgpa, cgpa } = resultContext;
+  const { courses, getCourses, loading, setResult, cgpa } = resultContext;
 
   useEffect(() => {
     getCourses();
@@ -59,13 +59,13 @@ const Courses = () => {
 
     result = (totalPoints / totalUnits).toFixed(3);
 
-    console.log(courseUnits);
-    console.log(totalUnits);
-    console.log(sumUnitxGrade);
-    console.log(totalPoints);
-    console.log(result);
+    // console.log(courseUnits);
+    // console.log(totalUnits);
+    // console.log(sumUnitxGrade);
+    // console.log(totalPoints);
+    // console.log(result);
 
-    getCgpa(result);
+    setResult(result, totalUnits);
   };
 
   return (
@@ -85,7 +85,7 @@ const Courses = () => {
         />
       </div>
 
-      <p className='text-dark'>CGPA: {cgpa}</p>
+      <p className='text-dark card'>CGPA: {cgpa}</p>
     </Fragment>
   );
 };
