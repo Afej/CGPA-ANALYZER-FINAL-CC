@@ -13,7 +13,8 @@ import {
   CLEAR_CURRENT_COURSE,
   CLEAR_RESULTS,
   GET_RESULT,
-  ADD_SEMESTER
+  ADD_SEMESTER,
+  GET_SEMESTERS
 } from '../types';
 
 const ResultState = props => {
@@ -38,6 +39,20 @@ const ResultState = props => {
       dispatch({
         type: COURSE_ERROR,
         payload: err.response.msg
+      });
+    }
+  };
+
+  //get semesters
+  const getSemesters = async () => {
+    try {
+      const res = await axios.get('/api/semester');
+
+      dispatch({ type: GET_SEMESTERS, payload: res.data });
+    } catch (err) {
+      dispatch({
+        type: SEMESTER_ERROR,
+        payload: err.response
       });
     }
   };
@@ -156,7 +171,8 @@ const ResultState = props => {
         getCourses,
         clearResults,
         setResult,
-        addSemester
+        addSemester,
+        getSemesters
       }}
     >
       {props.children}

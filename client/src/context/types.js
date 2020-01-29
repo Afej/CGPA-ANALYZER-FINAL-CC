@@ -20,3 +20,4 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const ADD_SEMESTER = 'ADD_SEMESTER';
+export const GET_SEMESTERS = 'GET_SEMESTERS';

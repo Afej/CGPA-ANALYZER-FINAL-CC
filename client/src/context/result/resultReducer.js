@@ -9,7 +9,8 @@ import {
   SEMESTER_ERROR,
   CLEAR_RESULTS,
   GET_RESULT,
-  ADD_SEMESTER
+  ADD_SEMESTER,
+  GET_SEMESTERS
 } from '../types';
 
 export default (state, action) => {
@@ -24,6 +25,13 @@ export default (state, action) => {
       return {
         ...state,
         courses: action.payload,
+        loading: false
+      };
+    case GET_SEMESTERS:
+      return {
+        ...state,
+        semester: action.payload,
+        cgpa: action.payload.cgpa,
         loading: false
       };
     case ADD_COURSE:

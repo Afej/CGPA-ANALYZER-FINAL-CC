@@ -6,7 +6,7 @@ const SemesterSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'users'
     },
-    gpa: {
+    cgpa: {
       type: Number
       // required: true
     },

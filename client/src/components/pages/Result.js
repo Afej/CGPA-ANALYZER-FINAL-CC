@@ -10,10 +10,11 @@ const Result = () => {
   const authContext = useContext(AuthContext);
   const resultContext = useContext(ResultContext);
 
-  const { semester, addSemester } = resultContext;
+  const { semester, addSemester, getSemesters } = resultContext;
 
   useEffect(() => {
     authContext.loadUser();
+    getSemesters();
     // eslint-disable-next-line
   }, []);
 
